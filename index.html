@@ -348,7 +348,8 @@
   let currentSlide = 0;
   const slides = document.querySelectorAll('.carousel .slide');
   let autoSlideInterval;
-  let autoSlideDelay = 5000; // 使用者操作後延遲5秒才恢復自動輪播
+  let autoSlideDelay = 5000;
+  let resetTimeoutId; // 用來儲存 setTimeout 的 ID
 
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
@@ -358,23 +359,31 @@
   function moveSlide(step) {
     currentSlide = (currentSlide + step + slides.length) % slides.length;
     showSlide(currentSlide);
-    resetAutoSlide(); // 每次有人操作，就重置自動輪播
+    resetAutoSlide(); // 人點了就重設
   }
 
   function startAutoSlide() {
-    autoSlideInterval = setInterval(function() {
-      moveSlide(1); // 自動播放下一張
-    }, 5000); 
+    // 啟動自動輪播前先清掉舊的 interval
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(() => {
+      moveSlide(1);
+    }, 5000);
   }
 
   function resetAutoSlide() {
-    clearInterval(autoSlideInterval); // 停止原本的自動輪播
-    setTimeout(startAutoSlide, autoSlideDelay); // 延遲5秒再啟動自動輪播
+    // 先清掉舊的 interval 跟 timeout
+    clearInterval(autoSlideInterval);
+    clearTimeout(resetTimeoutId);
+
+    // 過 5 秒才重新啟動輪播
+    resetTimeoutId = setTimeout(() => {
+      startAutoSlide();
+    }, autoSlideDelay);
   }
 
-  // 頁面一開始就啟動自動輪播
   startAutoSlide();
 </script>
+
 
 </body>
 </html>
