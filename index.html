@@ -221,6 +221,27 @@
   font-weight: bold;
   font-size: 16px;
 }
+.info {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.info-text {
+  flex: 1;
+}
+
+.info-image {
+  flex-shrink: 0;
+}
+
+.info-image img {
+  width: 420px;
+  height: 560px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
   </style>
 </head>
 <body>
@@ -231,6 +252,8 @@
     </div>
 
     <div class="info">
+     <div class="info-text">
+      <div class="section">
       <h1 style="color:#00CACA;">基本設定</h1>
       <p><strong>種族：</strong>玄鳳鸚鵡</p>
       <p><strong>本名：</strong>響 Hibiki</p>
@@ -240,7 +263,8 @@
       <p><strong>喜愛的食物：</strong>爆米花、蘋果西打</p>
       <p><strong>愛好：</strong>彈鋼琴、拉二胡、玩《糖豆人》、《動物大逃殺》</p>
       <p><strong>粉絲名：</strong>米花</p>
-
+      </div>
+     <div class="section">
       <h1 style="color:#00CACA;">重大活動歷程</h1>
       <p><strong>2023年2月26日</strong> &ensp; <strong style="color:#FF5809;">初配信</strong></p>
       <p><strong>2024年2月14日</strong> &ensp; <strong style="color:#FF5809;">五萬訂閱</strong></p>
@@ -250,7 +274,11 @@
       <p><strong>2025年3月3日</strong> &ensp; <strong style="color:#FF5809;">重大告知</strong></p>
       <p><strong>2025年4月27日</strong> &ensp; <strong style="color:#FF5809;">畢業典禮 響別之時</strong></p>
     </div>
-
+ </div>
+ <div class="info-image">
+    <img src="images/預告立繪3.avif" alt="旁邊的大圖">
+  </div>
+</div>
     <div class="intro">
       <p>作為企業勢，子午計畫所屬的歌勢Vtuber，一隻可愛的玄鳳鸚鵡，主要在Youtube上進行直播。做著家庭教師的工作，閒暇之餘會彈彈鋼琴、唱唱歌；她享受慢節奏的生活，並以悠揚的樂聲陪伴著所有的觀眾們。</p>
       <p>作為老師，她是 Mizuki 的指導者，和汐Seki 有著青梅竹馬的情誼。她的直播總是充滿溫度，無論是音樂還是遊戲，都能帶來療癒與歡笑。</p>
@@ -348,8 +376,7 @@
   let currentSlide = 0;
   const slides = document.querySelectorAll('.carousel .slide');
   let autoSlideInterval;
-  let autoSlideDelay = 5000;
-  let resetTimeoutId; // 用來儲存 setTimeout 的 ID
+  let autoSlideDelay = 5000; // 使用者操作後延遲5秒才恢復自動輪播
 
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
@@ -359,31 +386,23 @@
   function moveSlide(step) {
     currentSlide = (currentSlide + step + slides.length) % slides.length;
     showSlide(currentSlide);
-    resetAutoSlide(); // 人點了就重設
+    resetAutoSlide(); // 每次有人操作，就重置自動輪播
   }
 
   function startAutoSlide() {
-    // 啟動自動輪播前先清掉舊的 interval
-    clearInterval(autoSlideInterval);
-    autoSlideInterval = setInterval(() => {
-      moveSlide(1);
-    }, 5000);
+    autoSlideInterval = setInterval(function() {
+      moveSlide(1); // 自動播放下一張
+    }, 5000); 
   }
 
   function resetAutoSlide() {
-    // 先清掉舊的 interval 跟 timeout
-    clearInterval(autoSlideInterval);
-    clearTimeout(resetTimeoutId);
-
-    // 過 5 秒才重新啟動輪播
-    resetTimeoutId = setTimeout(() => {
-      startAutoSlide();
-    }, autoSlideDelay);
+    clearInterval(autoSlideInterval); // 停止原本的自動輪播
+    setTimeout(startAutoSlide, autoSlideDelay); // 延遲5秒再啟動自動輪播
   }
 
+  // 頁面一開始就啟動自動輪播
   startAutoSlide();
 </script>
-
 
 </body>
 </html>
