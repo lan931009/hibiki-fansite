@@ -134,6 +134,93 @@
         flex: 1 1 100%;
       }
     }
+
+.carousel {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.carousel img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+}
+
+.carousel p {
+  margin-top: 10px;
+  color: #555;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  border-radius: 50%;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+.carousel {
+  position: relative;
+  width: 80%;
+  margin: 2rem auto 0 auto;
+  text-align: center;
+  background: linear-gradient(#fce4ec, #ffffff); /* 整個輪播背景漸層 */
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.carousel img {
+  width: 380px;
+  height: 200px; /* 固定圖片高度 */
+  object-fit: cover; /* 讓圖片不變形裁切 */
+  border-radius: 10px;
+}
+
+.slide p {
+  background-color: #ffe6e9; /* 淡粉色區塊 */
+  margin-top: 10px;
+  padding: 10px 0;
+  border-radius: 10px;
+  color: #555;
+  font-weight: bold;
+  font-size: 16px;
+}
   </style>
 </head>
 <body>
@@ -188,10 +275,32 @@
         </div>
         <div class="outfit">
           <img src="images/20250426_095044.jpg" alt="第三套服裝" />
-          <p><strong>第三套服裝：</strong>最夢幻的糖果系可愛造型，粉色搭配閃亮亮細節！</p>
+          <p><strong>第三套服裝：</strong>這套服裝散發出濃厚的成熟女性氣質，相比之前的青春偶像風或女神風，這次的造型更偏向知性、優雅又帶點休閒的日常風。
+          <br><strong>風格與主題：</strong>有一種「在城市裡生活、工作，又不失自我風格」的感覺，像是某種溫柔又幹練的角色設定。
+          <br><strong>設計細節：</strong>深藍色內襯上衣＋米白色針織外套，配色穩重又溫暖。修身長裙設計到小腿處微喇叭開展，帶出柔和又女性化的線條。穿著的是厚底短靴，帶有些微街頭感，讓這套服裝不至於過於正式。</p>
+
         </div>
       </div>
     </div>
+    
+<div class="carousel">
+  <div class="slide active">
+    <a href="https://www.youtube.com/watch?v=c-CYJlA8Rns" target="_blank">
+      <img src="images/GclcQpDaEAAZx__.jpg" alt="小響唱歌" />
+    </a>
+    <p>小響的原創曲《響念 Missing》</p>
+  </div>
+
+  <div class="slide">
+    <a href="https://www.youtube.com/watch?v=1DjUJY_C4-g" target="_blank">
+      <img src="images/HIBIKI - 求救訊號-1.png" alt="小響唱歌" />
+    </a>
+    <p>求救訊號 - 響Hibiki【Cover】</p>
+  </div>
+
+  <a class="prev" onclick="moveSlide(-1)">❮</a>
+  <a class="next" onclick="moveSlide(1)">❯</a>
+</div>
 
     <div class="social">
       <a href="https://www.youtube.com/@HibikiVtuber" target="_blank">YouTube</a>
@@ -201,10 +310,43 @@
       <a href="https://www.instagram.com/hibiki_meridian/" target="_blank">Instagram</a>
       <a href="https://www.facebook.com/HibikiChannel" target="_blank">Facebook</a>
     </div>
-
+ 
     <div class="footer">
       本頁由粉絲自製，致敬我們最喜歡的 Biki。
     </div>
   </div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel .slide');
+  let autoSlideInterval;
+  let autoSlideDelay = 3000; // 使用者操作後延遲5秒才恢復自動輪播
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+  }
+
+  function moveSlide(step) {
+    currentSlide = (currentSlide + step + slides.length) % slides.length;
+    showSlide(currentSlide);
+    resetAutoSlide(); // 每次有人操作，就重置自動輪播
+  }
+
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(function() {
+      moveSlide(1); // 自動播放下一張
+    }, 3000); 
+  }
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval); // 停止原本的自動輪播
+    setTimeout(startAutoSlide, autoSlideDelay); // 延遲5秒再啟動自動輪播
+  }
+
+  // 頁面一開始就啟動自動輪播
+  startAutoSlide();
+</script>
+
 </body>
 </html>
