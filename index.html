@@ -284,7 +284,14 @@
     </div>
     
 <div class="carousel">
-  <div class="slide active">
+<div class="slide active">
+    <a href="https://www.youtube.com/watch?v=IEOLim3UiY8&t=732s" target="_blank">
+      <img src="images/HBK 3D 主視覺.png" alt="小響唱歌" />
+    </a>
+    <p>【3D初披露】My Turn, 響見你</p>
+  </div>
+
+  <div class="slide">
     <a href="https://www.youtube.com/watch?v=c-CYJlA8Rns" target="_blank">
       <img src="images/GclcQpDaEAAZx__.jpg" alt="小響唱歌" />
     </a>
@@ -296,6 +303,27 @@
       <img src="images/HIBIKI - 求救訊號-1.png" alt="小響唱歌" />
     </a>
     <p>求救訊號 - 響Hibiki【Cover】</p>
+  </div>
+
+<div class="slide">
+    <a href="https://www.youtube.com/watch?v=dwSs7Flj8wk" target="_blank">
+      <img src="images/perfect.png" alt="小響唱歌" />
+    </a>
+    <p>Perfect- 響Hibiki【Cover】</p>
+  </div>
+
+<div class="slide">
+    <a href="https://www.youtube.com/watch?v=5tdHDYW6x3g" target="_blank">
+      <img src="images/曲繪.png" alt="小響唱歌" />
+    </a>
+    <p>I Ain't Worried- 響Hibiki【Cover】</p>
+  </div>
+
+<div class="slide">
+    <a href="https://www.youtube.com/watch?v=jRhCBSAtBvE" target="_blank">
+      <img src="images/整體.png" alt="小響唱歌" />
+    </a>
+    <p>Adamas- 響Hibiki【Cover】</p>
   </div>
 
   <a class="prev" onclick="moveSlide(-1)">❮</a>
@@ -320,7 +348,7 @@
   let currentSlide = 0;
   const slides = document.querySelectorAll('.carousel .slide');
   let autoSlideInterval;
-  let autoSlideDelay = 3000; // 使用者操作後延遲5秒才恢復自動輪播
+  let autoSlideDelay = 5000; // 使用者操作後延遲5秒才恢復自動輪播
 
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
@@ -336,7 +364,7 @@
   function startAutoSlide() {
     autoSlideInterval = setInterval(function() {
       moveSlide(1); // 自動播放下一張
-    }, 3000); 
+    }, 5000); 
   }
 
   function resetAutoSlide() {
