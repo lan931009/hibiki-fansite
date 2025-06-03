@@ -112,10 +112,10 @@
       color: #333;
     }
 .outfit img {
-  width: 360px; /* 你可以改成任何你覺得合適的寬度 */
-  height: 190px; /* 自動依比例調整高度，避免圖片變形 */
-  border-radius: 10px; /* 如果你喜歡圓角可以保留，不喜歡可以刪掉這行 */
-  object-fit: cover; /* 如果想讓裁切更穩定也可以加這行 */
+  width: 360px;
+  height: 190px; 
+  border-radius: 10px; 
+  object-fit: cover; 
 }
 
     .outfit p strong {
@@ -199,7 +199,7 @@
   width: 80%;
   margin: 2rem auto 0 auto;
   text-align: center;
-  background: linear-gradient(#fce4ec, #ffffff); /* 整個輪播背景漸層 */
+  background: linear-gradient(#fce4ec, #ffffff);
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -207,13 +207,13 @@
 
 .carousel img {
   width: 380px;
-  height: 200px; /* 固定圖片高度 */
-  object-fit: cover; /* 讓圖片不變形裁切 */
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
 .slide p {
-  background-color: #ffe6e9; /* 淡粉色區塊 */
+  background-color: #00E3E3;
   margin-top: 10px;
   padding: 10px 0;
   border-radius: 10px;
@@ -376,7 +376,7 @@
   let currentSlide = 0;
   const slides = document.querySelectorAll('.carousel .slide');
   let autoSlideInterval;
-  let autoSlideDelay = 5000; // 使用者操作後延遲5秒才恢復自動輪播
+  let autoSlideDelay = 5000; 
 
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
@@ -386,21 +386,21 @@
   function moveSlide(step) {
     currentSlide = (currentSlide + step + slides.length) % slides.length;
     showSlide(currentSlide);
-    resetAutoSlide(); // 每次有人操作，就重置自動輪播
+    resetAutoSlide(); 
   }
 
   function startAutoSlide() {
     autoSlideInterval = setInterval(function() {
-      moveSlide(1); // 自動播放下一張
+      moveSlide(1);
     }, 5000); 
   }
 
   function resetAutoSlide() {
-    clearInterval(autoSlideInterval); // 停止原本的自動輪播
-    setTimeout(startAutoSlide, autoSlideDelay); // 延遲5秒再啟動自動輪播
+    clearInterval(autoSlideInterval); 
+    setTimeout(startAutoSlide, autoSlideDelay); 
   }
 
-  // 頁面一開始就啟動自動輪播
+  
   startAutoSlide();
 </script>
 
